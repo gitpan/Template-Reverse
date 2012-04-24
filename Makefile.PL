@@ -26,9 +26,10 @@ my %WriteMakefileArgs = (
     "Algorithm::Diff" => 0,
     "Any::Moose" => 0,
     "Carp" => 0,
-    "Module::Load" => 0
+    "Module::Load" => 0,
+    "namespace::autoclean" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }

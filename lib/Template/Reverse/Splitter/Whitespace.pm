@@ -1,6 +1,8 @@
 package Template::Reverse::Splitter::Whitespace;
 use Any::Moose;
-our $VERSION = '0.002';
+use namespace::autoclean;
+
+our $VERSION = '0.003';
 sub Split{
     my $self = shift;
     my $str = shift;
@@ -13,7 +15,7 @@ Template::Reverse::Splitter::Whitespace - Split text by whitespace
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
  
@@ -22,4 +24,5 @@ version 0.002
     $num->Split('1,000 dollers'); # ('1,000', 'dollers')
 
 =cut
+__PACKAGE__->meta->make_immutable;
 1;

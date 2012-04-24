@@ -1,8 +1,9 @@
 package Template::Reverse;
 use Any::Moose;
+use namespace::autoclean;
 use Module::Load;
 use Carp;
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 
 has 'splitter' => (
@@ -136,7 +137,7 @@ Template::Reverse - A detector of different parts between pair of text.
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -226,4 +227,6 @@ Text are processed by Spacers in order.
 Finding parts in texts, you must use this function with the texts.
 
 =cut
+
+__PACKAGE__->meta->make_immutable;
 1;

@@ -19,4 +19,5 @@ requires:
   Any::Moose: 0
   Carp: 0
   Module::Load: 0
-version: 0.002
+  namespace::autoclean: 0
+version: 0.003
