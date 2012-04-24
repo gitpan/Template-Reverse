@@ -12,6 +12,7 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "A detector of different parts between pair of text.",
   "AUTHOR" => "HyeonSeung Kim <sng2nara\@hanmail.net>",
   "BUILD_REQUIRES" => {
+    "Data::Dumper" => 0,
     "Test::More" => 0
   },
   "CONFIGURE_REQUIRES" => {
@@ -23,14 +24,11 @@ my %WriteMakefileArgs = (
   "NAME" => "Template::Reverse",
   "PREREQ_PM" => {
     "Algorithm::Diff" => 0,
+    "Any::Moose" => 0,
     "Carp" => 0,
-    "Data::Dumper" => 0,
-    "Module::Load" => 0,
-    "Moose" => 0,
-    "strict" => 0,
-    "warnings" => 0
+    "Module::Load" => 0
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }

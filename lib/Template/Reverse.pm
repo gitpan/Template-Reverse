@@ -1,11 +1,8 @@
-use strict;
-use warnings;
 package Template::Reverse;
-use Moose;
+use Any::Moose;
 use Module::Load;
 use Carp;
-use Data::Dumper;
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
 
 has 'splitter' => (
@@ -139,7 +136,7 @@ Template::Reverse - A detector of different parts between pair of text.
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 

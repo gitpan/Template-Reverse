@@ -1,7 +1,7 @@
 package Template::Reverse::Converter::TT2;
 
-use Moose;
-our $VERSION = '0.001';
+use Any::Moose;
+our $VERSION = '0.002';
 sub Convert{
     my $self = shift;
     my $parts = shift;
@@ -29,7 +29,7 @@ Template::Reverse::Convert::TT2 - Convert parts to TT2 format simply
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
     
