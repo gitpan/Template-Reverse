@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "A detector of different parts between pair of text.",
+  "ABSTRACT" => "A template generator getting different parts between pair of text",
   "AUTHOR" => "HyeonSeung Kim <sng2nara\@hanmail.net>",
   "BUILD_REQUIRES" => {
     "Data::Dumper" => 0,
@@ -29,7 +29,7 @@ my %WriteMakefileArgs = (
     "Module::Load" => 0,
     "namespace::autoclean" => 0
   },
-  "VERSION" => "0.005",
+  "VERSION" => "0.006",
   "test" => {
     "TESTS" => "t/*.t"
   }

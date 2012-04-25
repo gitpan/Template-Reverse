@@ -1,10 +1,13 @@
 package Template::Reverse;
+
+# ABSTRACT: A template generator getting different parts between pair of text
+
 use Any::Moose;
 use namespace::autoclean;
 use Module::Load;
 use Carp;
-our $VERSION = '0.005';
 
+our $VERSION = '0.006'; # VERSION
 
 has 'splitter' => (
     is=>'rw', 
@@ -16,6 +19,12 @@ has 'spacers' => (
     is=>'rw',
     isa=>'ArrayRef',
     default => sub{[]}
+);
+
+has 'sidelen' => (
+    is=>'rw',
+    isa=>'Int',
+    default => 10
 );
 
 sub detect{
@@ -39,7 +48,7 @@ sub detect{
 
     my $diff = _diff($res[0],$res[1]);
 
-    my $pattern = _detect($diff);
+    my $pattern = _detect($diff,$self->sidelen());
     return $pattern;
 }
 
@@ -59,6 +68,9 @@ use Algorithm::Diff qw(LCS LCS_length LCSidx diff sdiff compact_diff traverse_se
 
 sub _detect{
     my $diff = shift;
+    my $sidelen = shift;
+    $sidelen = 0 unless $sidelen;
+
     my @d = @{$diff};
     my $lastStar = 0;
     my @res;
@@ -66,7 +78,12 @@ sub _detect{
     {
         if( $d[$i] eq '*' )
         {
-            my @pre = map{substr($_,1);}@d[$lastStar..$i-1];
+            my $from = $lastStar;
+            my $to = $i-1;
+            if( $sidelen ){
+                $from = $to-$sidelen+1 if $to-$from+1 > $sidelen;
+            }
+            my @pre = map{substr($_,1);}@d[$from..$to];
             
             my $j = @d;
             if( $i+1 < @d ){
@@ -77,7 +94,12 @@ sub _detect{
                     }
                 }
             }
-            my @post =  map{substr($_,1);}@d[($i+1)..($j-1)];
+            $from = $i+1;
+            $to = $j-1;
+            if( $sidelen ){
+                $to = $from + $sidelen-1 if $to-$from+1 > $sidelen;
+            }
+            my @post =  map{substr($_,1);}@d[$from..$to];
 
             push(@res,[\@pre,\@post]);
             $lastStar = $i+1;
@@ -129,15 +151,21 @@ sub _checksum{
 
 
 
+
+
+__PACKAGE__->meta->make_immutable;
+1;
+
+__END__
 =pod
 
 =head1 NAME
 
-Template::Reverse - A detector of different parts between pair of text.
+Template::Reverse - A template generator getting different parts between pair of text
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -188,12 +216,17 @@ more
 Template::Reverse detects different parts between pair of similar text as merged texts from same template.
 And it can makes an output marked differences, encodes to TT2 format for being use by Template::Extract module.
 
+Template::Reverse - 
+
 =head1 FUNCTIONS
 
 =head3 new({spacers=>[$spacer_package1, ...], splitter=>$splitter_package})
 
-Spacers have order.
+=head4 spacers=>[$spacer_pakcage, ...]
 
+=head4 splitter=>$splitter_package
+
+=head4 sidelen=>$max_length_of_each_side
 
 =head3 detect($text1, $text2)
 
@@ -203,18 +236,18 @@ It returns like below
     $rev->detect('A b C','A d C');
     #
     # [ [ ['A'],['C'] ] ]
-    #   | |___| |___| |     
-    #   |  pre  post  |
-    #   |_____________|  
+    #   : :...: :...: :     
+    #   :  pre  post  :
+    #   :.............:  
     #       part 1
     #
 
     $rev->detect('A b C d E','A f C g E');
     #
     # [ [ ['A'], ['C'] ], [ ['C'], ['E'] ] ]
-    #   | |___|  |___| |  | |___|  |___| |
-    #   |  pre   post  |  |  pre   post  |
-    #   |______________|  |______________|
+    #   : :...:  :...: :  : :...:  :...: :
+    #   :  pre   post  :  :  pre   post  :
+    #   :..............:  :..............:
     #        part 1            part 2
     #
 
@@ -228,9 +261,9 @@ It returns like below
     my $parts = $rev->detect($str1, $str2);
     #
     # [ [ ['I','am'], ['and'] ] , [ ['and'],[] ] ]
-    #   | |________|  |_____| |   |            |
-    #   |    pre       post   |   |            |
-    #   |_____________________|   |____________|
+    #   : :........:  :.....: :   :            :
+    #   :    pre       post   :   :            :
+    #   :.....................:   :............:
     #           part 1                part 2
     #
 
@@ -246,7 +279,26 @@ It returns a normalized text same as in detect().
 Text are processed by Spacers in order.
 Finding parts in texts, you must use this function with the texts.
 
+=head1 SEE ALSO
+
+=item *
+
+L<Template::Extract>
+
+=head1 SOURCE
+
+L<https://github.com/sng2c/Template-Reverse>
+
+=head1 AUTHOR
+
+HyeonSeung Kim <sng2nara@hanmail.net>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by HyeonSeung Kim.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
 
-__PACKAGE__->meta->make_immutable;
-1;

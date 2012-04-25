@@ -13,6 +13,7 @@ lib/Template/Reverse/Splitter/Whitespace.pm
 t/00-sdiff.t
 t/01-numericspacer.t
 t/02-split.t
+t/03-1-reverse-detect-sidelen.t
 t/03-reverse-detect.t
 t/04-reverse-default.t
 t/05-reverse-numeric.t

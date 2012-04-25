@@ -1,8 +1,12 @@
 package Template::Reverse::Converter::TT2;
 
+# ABSTRACT: Convert parts to TT2 format simply
+
 use Any::Moose;
 use namespace::autoclean;
-our $VERSION = '0.004';
+
+our $VERSION = '0.006'; # VERSION
+
 sub Convert{
     my $self = shift;
     my $parts = shift;
@@ -22,23 +26,37 @@ sub Convert{
 }
 
 
+
+__PACKAGE__->meta->make_immutable;
+1;
+
+__END__
 =pod
 
 =head1 NAME
 
-Template::Reverse::Convert::TT2 - Convert parts to TT2 format simply
+Template::Reverse::Converter::TT2 - Convert parts to TT2 format simply
 
 =head1 VERSION
 
-0.0004
+version 0.006
 
 =head1 SYNOPSIS
-    
+
     package Template::Reverse::Converter::TT2;
     my $tt2 = Template::Reverse::Converter::TT2->new;
     $tt2->Convert([[['pretext'],['posttext']]]);
 
+=head1 AUTHOR
+
+HyeonSeung Kim <sng2nara@hanmail.net>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by HyeonSeung Kim.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 =cut
 
-__PACKAGE__->meta->make_immutable;
-1;
