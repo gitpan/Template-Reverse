@@ -15,7 +15,7 @@ Template::Reverse::Splitter::Whitespace - Split text by whitespace
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
  

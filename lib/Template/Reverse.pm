@@ -3,7 +3,7 @@ use Any::Moose;
 use namespace::autoclean;
 use Module::Load;
 use Carp;
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 
 has 'splitter' => (
@@ -137,7 +137,7 @@ Template::Reverse - A detector of different parts between pair of text.
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 

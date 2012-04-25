@@ -30,7 +30,7 @@ Template::Reverse::Convert::TT2 - Convert parts to TT2 format simply
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
     

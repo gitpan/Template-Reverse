@@ -8,6 +8,7 @@ dist.ini
 lib/Template/Reverse.pm
 lib/Template/Reverse/Converter/TT2.pm
 lib/Template/Reverse/Spacer/Numeric.pm
+lib/Template/Reverse/Spacer/Punctuation.pm
 lib/Template/Reverse/Splitter/Whitespace.pm
 t/00-sdiff.t
 t/01-numericspacer.t
@@ -19,5 +20,6 @@ t/06-reverse-space.t
 t/07-convert-tt2.t
 t/08-reverse-convert-tt2.t
 t/09-cowork-extract.t
+t/10-puncspacer.t
 t/sample1.txt
 t/sample2.txt
