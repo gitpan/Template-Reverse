@@ -20,4 +20,4 @@ requires:
   Carp: 0
   Module::Load: 0
   namespace::autoclean: 0
-version: 0.006
+version: 0.007

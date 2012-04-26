@@ -7,7 +7,7 @@ use namespace::autoclean;
 use Module::Load;
 use Carp;
 
-our $VERSION = '0.006'; # VERSION
+our $VERSION = '0.007'; # VERSION
 
 has 'splitter' => (
     is=>'rw', 
@@ -165,7 +165,7 @@ Template::Reverse - A template generator getting different parts between pair of
 
 =head1 VERSION
 
-version 0.006
+version 0.007
 
 =head1 SYNOPSIS
 
