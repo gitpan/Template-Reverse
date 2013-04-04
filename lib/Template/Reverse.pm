@@ -7,7 +7,10 @@ use namespace::autoclean;
 use Module::Load;
 use Carp;
 
-our $VERSION = '0.007'; # VERSION
+use Algorithm::Diff qw(sdiff);
+
+our $VERSION = '0.01'; # VERSION
+
 
 has 'splitter' => (
     is=>'rw', 
@@ -26,6 +29,7 @@ has 'sidelen' => (
     isa=>'Int',
     default => 10
 );
+
 
 sub detect{
     my $self = shift;
@@ -64,8 +68,8 @@ sub space{
     return $str;
 }
 
-use Algorithm::Diff qw(LCS LCS_length LCSidx diff sdiff compact_diff traverse_sequences traverse_balanced);
 
+### internal functions
 sub _detect{
     my $diff = shift;
     my $sidelen = shift;
@@ -157,6 +161,7 @@ __PACKAGE__->meta->make_immutable;
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -165,7 +170,7 @@ Template::Reverse - A template generator getting different parts between pair of
 
 =head1 VERSION
 
-version 0.007
+version 0.01
 
 =head1 SYNOPSIS
 
@@ -216,17 +221,35 @@ more
 Template::Reverse detects different parts between pair of similar text as merged texts from same template.
 And it can makes an output marked differences, encodes to TT2 format for being use by Template::Extract module.
 
-Template::Reverse - 
-
 =head1 FUNCTIONS
 
-=head3 new({spacers=>[$spacer_package1, ...], splitter=>$splitter_package})
+=head3 new(OPTION_HASH_REF)
 
-=head4 spacers=>[$spacer_pakcage, ...]
+=head4 splitter=>$splitter_pkgname
 
-=head4 splitter=>$splitter_package
+A splitter splits text into Array by its own rule.
+You can set only one splitter at a time.
+
+L<Template::Reverse::Splitter::Whitespace> is a default splitter and splits text by whitespaces.
+
+=head4 spacers=>[$spacer_pkgname, ...]
+
+A spacer inserts spaces by its own rule.
+You can set several spacers in order.
+A spacer works sequencially before a splitter working.
+
+Not only inserting, removing uninterest things, changing some charaters and etc.
+
+Spacers is reused in $self->space($str) for more exact results.
 
 =head4 sidelen=>$max_length_of_each_side
+
+sidelen is a short of "side character's each max length".
+the default value is 10. Setting 0 means full-length.
+
+If you set it as 3, you get max 3 length pre-text and post-text array each part.
+
+This is needed for more faster performance.
 
 =head3 detect($text1, $text2)
 
@@ -275,9 +298,8 @@ Returned arrayRef is list of changable parts.
 
 =head3 space($text)
 
-It returns a normalized text same as in detect().
-Text are processed by Spacers in order.
-Finding parts in texts, you must use this function with the texts.
+It returns a processed text by same rule as in detect().
+Text are processed by Spacers sequencially.
 
 =head1 SEE ALSO
 
@@ -301,4 +323,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

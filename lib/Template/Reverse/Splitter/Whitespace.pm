@@ -5,7 +5,7 @@ package Template::Reverse::Splitter::Whitespace;
 use Any::Moose;
 use namespace::autoclean;
 
-our $VERSION = '0.007'; # VERSION
+our $VERSION = '0.01'; # VERSION
 
 sub Split{
     my $self = shift;
@@ -18,6 +18,7 @@ __PACKAGE__->meta->make_immutable;
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -26,7 +27,7 @@ Template::Reverse::Splitter::Whitespace - Split text by whitespace
 
 =head1 VERSION
 
-version 0.007
+version 0.01
 
 =head1 SYNOPSIS
 
@@ -46,4 +47,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
