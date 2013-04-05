@@ -1,6 +1,6 @@
-package Template::Reverse::Spacer::Punctuation;
+package Template::Reverse::Spacer::HTML;
 
-# ABSTRACT: Insert spaces around punctuations.
+# ABSTRACT: Insert spaces around html tags and attrs
 
 use Any::Moose;
 use namespace::autoclean;
@@ -10,27 +10,23 @@ our $VERSION = '0.02'; # VERSION
 sub Space{
     my $self = shift;
     my $str = shift;
-    return _space($str);
+    my $spaced = _space($str);
+	return $spaced;
 }
+
 
 sub _space{
     my $str = shift;
-    $str =~ s/([~`!\@#\$\%^&*()_+\-=\[\]{};:'",<\.>\/\?\|\\]+)/_punc($`,$1,$')/ge;
+	
+	# around html 
+	$str =~ s/<.+?>/ $& /g;
+	# around attr
+	$str =~ s/=\s*(["']?)([^>\1]+)\1/=$1 $2 $1/g;
 
     $str =~ s/\s+/ /g;
     $str =~ s/^\s//g;
     $str =~ s/\s$//g;
     return $str;
-}
-sub _punc{
-    my ($p,$m,$n) = @_;
-
-    if( $m =~/[\.,]/ && $p =~ /\d$/ && $n =~ /^\d/  ){
-        return $m;
-    }
-    else{
-        return " $m ";
-    }
 }
 
 
@@ -43,7 +39,7 @@ __END__
 
 =head1 NAME
 
-Template::Reverse::Spacer::Punctuation - Insert spaces around punctuations.
+Template::Reverse::Spacer::HTML - Insert spaces around html tags and attrs
 
 =head1 VERSION
 
@@ -51,9 +47,9 @@ version 0.02
 
 =head1 SYNOPSIS
 
-    package Template::Reverse::Spacer::Punctuation;
-    my $num = Template::Reverse::Spacer::Punctuation->new;
-    $num->Space('hello,world!!'); # 'hello , world !!'
+    package Template::Reverse::Spacer::HTML;
+    my $num = Template::Reverse::Spacer::HTML->new;
+    $num->Space('<a href="http://test.com">TEST</a>'); # '<a href=" http://test.com "> TEST </a>'
 
 =head1 AUTHOR
 

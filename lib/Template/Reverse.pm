@@ -9,7 +9,7 @@ use Carp;
 
 use Algorithm::Diff qw(sdiff);
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 
 has 'splitter' => (
@@ -170,7 +170,7 @@ Template::Reverse - A template generator getting different parts between pair of
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

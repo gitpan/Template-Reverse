@@ -5,7 +5,7 @@ package Template::Reverse::Spacer::PunctuationUrlSafe;
 use Any::Moose;
 use namespace::autoclean;
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 sub Space{
     my $self = shift;
@@ -62,7 +62,7 @@ Template::Reverse::Spacer::PunctuationUrlSafe - Insert spaces around punctuation
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

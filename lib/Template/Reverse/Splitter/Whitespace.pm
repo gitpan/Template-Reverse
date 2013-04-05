@@ -5,7 +5,7 @@ package Template::Reverse::Splitter::Whitespace;
 use Any::Moose;
 use namespace::autoclean;
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 sub Split{
     my $self = shift;
@@ -27,7 +27,7 @@ Template::Reverse::Splitter::Whitespace - Split text by whitespace
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

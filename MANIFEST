@@ -8,6 +8,7 @@ README.md
 dist.ini
 lib/Template/Reverse.pm
 lib/Template/Reverse/Converter/TT2.pm
+lib/Template/Reverse/Spacer/HTML.pm
 lib/Template/Reverse/Spacer/Numeric.pm
 lib/Template/Reverse/Spacer/Punctuation.pm
 lib/Template/Reverse/Spacer/PunctuationUrlSafe.pm
@@ -25,5 +26,6 @@ t/08-reverse-convert-tt2.t
 t/09-cowork-extract.t
 t/10-puncspacer.t
 t/11-puncurlsafespacer.t
+t/12-htmlspacer.t
 t/sample1.txt
 t/sample2.txt
