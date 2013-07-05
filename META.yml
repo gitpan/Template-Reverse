@@ -16,11 +16,9 @@ meta-spec:
 name: Template-Reverse
 requires:
   Algorithm::Diff: 0
-  Any::Moose: 0
   Carp: 0
   Moo: 0
-  namespace::autoclean: 0
 resources:
   homepage: https://github.com/sng2c/Template-Reverse
   repository: git://github.com/sng2c/Template-Reverse.git
-version: 0.100
+version: 0.101

@@ -2,10 +2,9 @@ package Template::Reverse::Converter::TT2;
 
 # ABSTRACT: Convert parts to TT2 format simply
 
-use Any::Moose;
-use namespace::autoclean;
+use Moo;
 
-our $VERSION = '0.100'; # VERSION
+our $VERSION = '0.101'; # VERSION
 
 sub Convert{
     my $self = shift;
@@ -27,7 +26,6 @@ sub Convert{
 
 
 
-__PACKAGE__->meta->make_immutable;
 1;
 
 __END__
@@ -40,7 +38,7 @@ Template::Reverse::Converter::TT2 - Convert parts to TT2 format simply
 
 =head1 VERSION
 
-version 0.100
+version 0.101
 
 =head1 SYNOPSIS
 

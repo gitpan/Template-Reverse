@@ -7,7 +7,7 @@ use Carp;
 
 use Algorithm::Diff qw(sdiff);
 
-our $VERSION = '0.100'; # VERSION
+our $VERSION = '0.101'; # VERSION
 
 
 has 'sidelen' => (
@@ -101,7 +101,7 @@ Template::Reverse - A template generator getting different parts between pair of
 
 =head1 VERSION
 
-version 0.100
+version 0.101
 
 =head1 SYNOPSIS
 

@@ -3,8 +3,14 @@ Changes from 2012-07-05 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.100 at 2013-07-05 01:41:00 +0000
+version 0.101 at 2013-07-05 01:45:20 +0000
 ------------------------------------------
+
+  Change: 7be35d78ff5e95e11276f520c8c57027d17b3e4a
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-05 10:44:09 +0000
+
+    Change using Any::Moose to Moo 
 
   Change: 97744ad80905a0cd6a115fa44e676da5b786e830
   Author: sng2c <sng2nara@gmail.com>

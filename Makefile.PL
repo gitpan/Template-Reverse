@@ -21,16 +21,14 @@ my %WriteMakefileArgs = (
   "NAME" => "Template::Reverse",
   "PREREQ_PM" => {
     "Algorithm::Diff" => 0,
-    "Any::Moose" => 0,
     "Carp" => 0,
-    "Moo" => 0,
-    "namespace::autoclean" => 0
+    "Moo" => 0
   },
   "TEST_REQUIRES" => {
     "Data::Dumper" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.100",
+  "VERSION" => "0.101",
   "test" => {
     "TESTS" => "t/*.t"
   }
