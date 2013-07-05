@@ -23,14 +23,14 @@ my %WriteMakefileArgs = (
     "Algorithm::Diff" => 0,
     "Any::Moose" => 0,
     "Carp" => 0,
-    "Module::Load" => 0,
+    "Moo" => 0,
     "namespace::autoclean" => 0
   },
   "TEST_REQUIRES" => {
     "Data::Dumper" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.100",
   "test" => {
     "TESTS" => "t/*.t"
   }

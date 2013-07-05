@@ -2,31 +2,16 @@ package Template::Reverse;
 
 # ABSTRACT: A template generator getting different parts between pair of text
 
-use Any::Moose;
-use namespace::autoclean;
-use Module::Load;
+use Moo;
 use Carp;
 
 use Algorithm::Diff qw(sdiff);
 
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.100'; # VERSION
 
-
-has 'splitter' => (
-    is=>'rw', 
-    isa => 'Str',
-    default => 'Template::Reverse::Splitter::Whitespace'
-);
-
-has 'spacers' => (
-    is=>'rw',
-    isa=>'ArrayRef',
-    default => sub{[]}
-);
 
 has 'sidelen' => (
     is=>'rw',
-    isa=>'Int',
     default => 10
 );
 
@@ -34,38 +19,9 @@ has 'sidelen' => (
 sub detect{
     my $self = shift;
     my @strs = @_;
-
-
-    # apply Spacers
-    for(my $i=0; $i<@strs; $i++){
-        $strs[$i] = $self->space($strs[$i]);
-    }
-    
-    my @res;
-    my $splitter_class = $self->splitter;
-    load $splitter_class;
-    my $splitter = $splitter_class->new;
-    foreach my $str (@strs){
-        push(@res, [$splitter->Split($str)]);
-    }
-    undef $splitter;
-
-    my $diff = _diff($res[0],$res[1]);
-
+    my $diff = _diff($strs[0],$strs[1]);
     my $pattern = _detect($diff,$self->sidelen());
     return $pattern;
-}
-
-sub space{
-    my $self = shift;
-    my $str = shift;
-    foreach my $spacer_class (@{$self->spacers()}){
-        load $spacer_class;
-        my $spacer = $spacer_class->new;
-        $str = $spacer->Space($str);
-        undef($spacer);
-    }
-    return $str;
 }
 
 
@@ -131,33 +87,8 @@ sub _diff{
     return \@rr;
 }
 
-sub _make_map{
-    my @asc = qw(a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9 );
-    my $str = shift;
-    my $spaced = _space($str);
-    my @chunk = split(/\s+/,$spaced);
-
-    my $out='';
-    foreach my $c (@chunk)
-    {
-        my $sum=_checksum($c);
-        $out.= $asc[$sum % @asc];
-    }
-    return $out;
-}
-
-sub _checksum{
-    my $str = shift;
-    my $sum = 0;
-    map{$sum+=ord($_)}split(//,$str);
-    return $sum;
-}
 
 
-
-
-
-__PACKAGE__->meta->make_immutable;
 1;
 
 __END__
@@ -170,17 +101,14 @@ Template::Reverse - A template generator getting different parts between pair of
 
 =head1 VERSION
 
-version 0.04
+version 0.100
 
 =head1 SYNOPSIS
 
     use Template::Reverse;
-    my $rev = Template::Reverse->new({
-            spacers=>['Template::Reverse::Spacer::Number'],         # put spaces around Numbers. [OPTIONAL]
-            splitter=>'Template::Reverse::Splitter::Whitespace',    # and splitting text by white spaces. [DEFAULT]
-    });
+    my $rev = Template::Reverse->new();
 
-    my $parts = $rev->detect($output1, $output2); # returns [ [[PRE],[POST]], ... ]
+    my $parts = $rev->detect($arr_ref1, $arr_ref2); # returns [ [[PRE],[POST]], ... ]
 
     use Template::Reverse::Converter::TT2;
     my @templates = Template::Reverse::TT2Converter::Convert($parts); # named 'value1','value2',...
@@ -195,25 +123,23 @@ more
     my $rev = Template::Reverse->new;
 
     # generating patterns automatically!!
-    my $str1 = "I am perl and smart";
-    my $str2 = "I am khs and a perlmania";
+    my $str1 = [qw(I am perl and smart)];
+    my $str2 = [qw(I am khs and a perlmania)];
     my $parts = $rev->detect($str1, $str2);
 
     my $tt2 = Template::Reverse::Converter::TT2->new;
     my $temps = $tt2->Convert($parts); # equals ['I am [% value %] and','and [% value %]']
 
 
-    # spacing text for normalization.
     my $str3 = "I am king of the world and a richest man";
-    my $str3spaced = $rev->space($str3);
 
     # extract!!
     use Template::Extract;
     my $ext = Template::Extract->new;
-    my $value = $ext->extract($temps->[0], $str3spaced);
+    my $value = $ext->extract($temps->[0], $str3);
     print Dumper($value); # output : {'value'=>'king of the world'}
 
-    my $value = $ext->extract($temps->[1], $str3spaced);
+    my $value = $ext->extract($temps->[1], $str3);
     print Dumper($value); # output : {'value'=>'a richest man'}
 
 =head1 DESCRIPTION
@@ -224,23 +150,6 @@ And it can makes an output marked differences, encodes to TT2 format for being u
 =head1 FUNCTIONS
 
 =head3 new(OPTION_HASH_REF)
-
-=head4 splitter=>$splitter_pkgname
-
-A splitter splits text into Array by its own rule.
-You can set only one splitter at a time.
-
-L<Template::Reverse::Splitter::Whitespace> is a default splitter and splits text by whitespaces.
-
-=head4 spacers=>[$spacer_pkgname, ...]
-
-A spacer inserts spaces by its own rule.
-You can set several spacers in order.
-A spacer works sequencially before a splitter working.
-
-Not only inserting, removing uninterest things, changing some charaters and etc.
-
-Spacers is reused in $self->space($str) for more exact results.
 
 =head4 sidelen=>$max_length_of_each_side
 
@@ -256,7 +165,7 @@ This is needed for more faster performance.
 Get changable part list from two texts.
 It returns like below
 
-    $rev->detect('A b C','A d C');
+    $rev->detect([qw(A b C)], [qw(A d C)]);
     #
     # [ [ ['A'],['C'] ] ]
     #   : :...: :...: :     
@@ -265,7 +174,7 @@ It returns like below
     #       part 1
     #
 
-    $rev->detect('A b C d E','A f C g E');
+    $rev->detect([qw(A b C d E)],[qw(A f C g E)]);
     #
     # [ [ ['A'], ['C'] ], [ ['C'], ['E'] ] ]
     #   : :...:  :...: :  : :...:  :...: :
@@ -274,7 +183,7 @@ It returns like below
     #        part 1            part 2
     #
 
-    $rev->detect('A1 A2 B C1 C2 D E1 E2','A1 A2 D C1 C2 F E1 E2');
+    $rev->detect([qw(A1 A2 B C1 C2 D E1 E2)],[qw(A1 A2 D C1 C2 F E1 E2)]);
     #
     # [ [ ['A1','A2'],['C2','C2'] ], [ ['C1','C2'], ['E2','E2'] ] ]
     #
@@ -296,11 +205,6 @@ Returned arrayRef is list of changable parts.
     2. 'pre texts' and 'post texts' are splited by Splitter. In this case, by Whitespace.
     3. You can get a changing value, just finding 'pre' and 'post' in a normalized text.
 
-=head3 space($text)
-
-It returns a processed text by same rule as in detect().
-Text are processed by Spacers sequencially.
-
 =head1 SEE ALSO
 
 =item *
@@ -310,6 +214,13 @@ L<Template::Extract>
 =head1 SOURCE
 
 L<https://github.com/sng2c/Template-Reverse>
+
+=head1 THANKS TO
+
+=item https://metacpan.org/author/AMORETTE
+
+This module is dedicated to AMORETTE.
+He was interested in this module and was cheering me up.
 
 =head1 AUTHOR
 

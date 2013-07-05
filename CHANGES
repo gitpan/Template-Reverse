@@ -1,0 +1,80 @@
+==================================================
+Changes from 2012-07-05 00:00:00 +0000 to present.
+==================================================
+
+------------------------------------------
+version 0.100 at 2013-07-05 01:41:00 +0000
+------------------------------------------
+
+  Change: 97744ad80905a0cd6a115fa44e676da5b786e830
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-05 10:39:47 +0000
+
+    change version. 
+
+  Change: 716c0996797ae814e26bf66ffae6958669c57927
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-05 10:29:43 +0000
+
+    Issue #1,#3
+
+    - Use arrays intead of string as input. - Remove Spacer and Splitter
+    interface. 
+
+  Change: a662d35639aa0daaa1ab3ec6194af267699e0293
+  Author: HyunSeung Kim <sng2nara@hanmail.net>
+  Date : 2013-05-12 01:47:34 +0000
+
+    for https://metacpan.org/author/AMORETTE 
+
+-----------------------------------------
+version 0.04 at 2013-04-05 02:08:46 +0000
+-----------------------------------------
+
+  Change: fe7ac2f29fc2d98cf7d81814dd4ef00d4ff55ad6
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-04-05 11:08:46 +0000
+
+    fix recovering url bug 
+
+-----------------------------------------
+version 0.02 at 2013-04-05 00:34:57 +0000
+-----------------------------------------
+
+  Change: aefc6d5c8d55431040292f2315d47d1a4b881954
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-04-05 09:34:57 +0000
+
+    add HTML spacer 
+
+-----------------------------------------
+version 0.01 at 2013-04-04 10:45:06 +0000
+-----------------------------------------
+
+  Change: b8a28846de850e15495582050b10599985d7185f
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-04-04 19:45:06 +0000
+
+    add html urlsafe spacer 
+
+  Change: a2200ee5d5a3f34fa326c91defc1e62c35be67d9
+  Author: HyunSeung Kim <sng2nara@hanmail.net>
+  Date : 2012-04-27 22:51:55 +0000
+
+    add repo url and homepage in Metadata 
+
+  Change: f9b08740d02bba03ace95f817ce2a9ecfa66640c
+  Author: sng2c <sng2nara@hanmail.net>
+  Date : 2012-04-26 13:16:06 +0000
+
+    Accepting Odd-Even versioning. version to 0.009 
+
+  Change: 0463b164ed717a85ce1eb501f7ff36af7ca6209a
+  Author: sng2c <sng2nara@hanmail.net>
+  Date : 2012-04-26 13:13:01 +0000
+
+    Documentation more. Change version to 0.008 in dist.ini 
+
+================================================
+Plus 5 releases after 2012-07-05 00:00:00 +0000.
+================================================
