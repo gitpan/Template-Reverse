@@ -3,8 +3,16 @@ Changes from 2012-07-06 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.120 at 2013-07-06 16:04:14 +0000
+version 0.121 at 2013-07-06 16:56:39 +0000
 ------------------------------------------
+
+  Change: 3b826439049c12e18bed63ceccbc6849c0330d28
+  Author: HyunSeung Kim <sng2nara@hanmail.net>
+  Date : 2013-07-07 01:54:07 +0000
+
+    Issue #10
+
+    * Remove document about Parse::Token::Lite::Token. * Update document. 
 
   Change: dd06f3708da2d6f5044a8fa7ad6c3d80d05f2a42
   Author: HyunSeung Kim <sng2nara@hanmail.net>
