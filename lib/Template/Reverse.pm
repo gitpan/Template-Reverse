@@ -6,14 +6,20 @@ use Moo;
 use Carp;
 use Template::Reverse::Part;
 use Algorithm::Diff qw(sdiff);
-
-our $VERSION = '0.110'; # VERSION
+use Scalar::Util qw(blessed);
+our $VERSION = '0.120'; # VERSION
 
 
 has 'sidelen' => (
     is=>'rw',
     default => 10
 );
+
+my $_WILDCARD = bless [], 'WILDCARD';
+sub WILDCARD{return $_WILDCARD};
+sub _isWILDCARD{
+  return ref $_[0] eq 'WILDCARD';
+}
 
 
 sub detect{
@@ -30,26 +36,25 @@ sub _detect{
     my $diff = shift;
     my $sidelen = shift;
     $sidelen = 0 unless $sidelen;
-
     my @d = @{$diff};
     my $lastStar = 0;
     my @res;
     for(my $i=0; $i<@d; $i++)
     {
-        if( $d[$i] eq '*' )
+        if( _isWILDCARD($d[$i] ) )
         {
             my $from = $lastStar;
             my $to = $i-1;
             if( $sidelen ){
                 $from = $to-$sidelen+1 if $to-$from+1 > $sidelen;
             }
-            my @pre = map{substr($_,1);}@d[$from..$to];
+            my @pre = @d[$from..$to];
             
             my $j = @d;
             if( $i+1 < @d ){
                 for( $j=$i+1; $j<@d; $j++)
                 {
-                    if( $d[$j] eq '*' ){
+                    if( _isWILDCARD( $d[$j] ) ){
                         last;
                     }
                 }
@@ -59,7 +64,7 @@ sub _detect{
             if( $sidelen ){
                 $to = $from + $sidelen-1 if $to-$from+1 > $sidelen;
             }
-            my @post =  map{substr($_,1);}@d[$from..$to];
+            my @post = @d[$from..$to];
             my $part = Template::Reverse::Part->new(pre=>\@pre, post=>\@post);
             push(@res,$part);
             $lastStar = $i+1;
@@ -68,21 +73,29 @@ sub _detect{
     return \@res;
 }
 
+
 sub _diff{
     my ($a,$b) = @_;
+    my ($org_a,$org_b) = @_;
 
+    $a = [map{blessed($_)?$_->as_string:$_}@{$a}];
+    $b = [map{blessed($_)?$_->as_string:$_}@{$b}];
+    
     my @d = sdiff($a,$b);
     my @rr;
     my $before='';
+    my $idx = 0;
     for my $r (@d){
         if( $r->[0] eq 'u' ){
-            push(@rr,'-'.$r->[1]);
+            push(@rr,$org_a->[$idx]);
             $before = '';
         }
         else{
-            push(@rr,'*') if( $before ne '*' );
-            $before = '*';
+            push(@rr,WILDCARD) unless _isWILDCARD($before);
+            $before = WILDCARD;
         }
+        $idx++ if $r->[0] ne '+';
+        
     }
     return \@rr;
 }
@@ -101,7 +114,7 @@ Template::Reverse - A template generator getting different parts between pair of
 
 =head1 VERSION
 
-version 0.110
+version 0.120
 
 =head1 SYNOPSIS
 
@@ -160,14 +173,20 @@ If you set it as 3, you get max 3 length pre-text and post-text array each part.
 
 This is needed for more faster performance.
 
-=head3 detect($text1, $text2)
+=head3 detect($arr_of_text1, $arr_of_text2)
 
-Get changable array-ref of L<Template::Reverse::Part> from two texts.
+=head3 detect($tokens1, $tokens2)
+
+Get an array-ref of L<Template::Reverse::Part> from two array-refs.
+A L<Template::Reverse::Part> class means an one changable token.
+
+The token is L<Parse::Token::Lite::Token>.
+
 It returns like below.
 
     $rev->detect([qw(A b C)], [qw(A d C)]);
     # 
-    # [ { ['A'],['C'] } ] <- Plaese focus at data, not expression.
+    # [ { ['A'],['C'] } ] <- Please focus at data, not expression.
     #   : :...: :...: :     
     #   :  pre  post  :
     #   :.............:  
@@ -188,8 +207,8 @@ It returns like below.
     # [ { ['A1','A2'],['C2','C2'] }, { ['C1','C2'], ['E2','E2'] } ]
     #
 
-    my $str1 = "I am perl and smart";
-    my $str2 = "I am KHS and a perlmania";
+    my $str1 = [qw"I am perl and smart"];
+    my $str2 = [qw"I am KHS and a perlmania"];
     my $parts = $rev->detect($str1, $str2);
     #
     # [ { ['I','am'], ['and'] } , { ['and'],[] } ]

@@ -3,8 +3,8 @@ package Template::Reverse::Converter::TT2;
 # ABSTRACT: Convert parts to TT2 format simply
 
 use Moo;
-
-our $VERSION = '0.110'; # VERSION
+use Scalar::Util qw(blessed);
+our $VERSION = '0.120'; # VERSION
 
 sub Convert{
     my $self = shift;
@@ -14,6 +14,9 @@ sub Convert{
     foreach my $pat (@{$parts}){
         my @pre = @{$pat->pre};
         my @post = @{$pat->post};
+
+        @pre = map{blessed($_)?$_->as_string:$_}@pre;
+        @post= map{blessed($_)?$_->as_string:$_}@post;
         my $pretxt = join ' ',@pre;
         my $posttxt = join ' ',@post;
         $pretxt .= ' ' if $pretxt;
@@ -38,7 +41,7 @@ Template::Reverse::Converter::TT2 - Convert parts to TT2 format simply
 
 =head1 VERSION
 
-version 0.110
+version 0.120
 
 =head1 SYNOPSIS
 
