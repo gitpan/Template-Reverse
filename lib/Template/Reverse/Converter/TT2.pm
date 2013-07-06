@@ -4,7 +4,7 @@ package Template::Reverse::Converter::TT2;
 
 use Moo;
 
-our $VERSION = '0.101'; # VERSION
+our $VERSION = '0.110'; # VERSION
 
 sub Convert{
     my $self = shift;
@@ -12,8 +12,8 @@ sub Convert{
     my @temps;
 
     foreach my $pat (@{$parts}){
-        my @pre = @{$pat->[0]};
-        my @post = @{$pat->[1]};
+        my @pre = @{$pat->pre};
+        my @post = @{$pat->post};
         my $pretxt = join ' ',@pre;
         my $posttxt = join ' ',@post;
         $pretxt .= ' ' if $pretxt;
@@ -38,7 +38,7 @@ Template::Reverse::Converter::TT2 - Convert parts to TT2 format simply
 
 =head1 VERSION
 
-version 0.101
+version 0.110
 
 =head1 SYNOPSIS
 
