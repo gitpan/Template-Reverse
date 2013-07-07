@@ -4,7 +4,7 @@ package Template::Reverse::Converter::TT2;
 
 use Moo;
 use Scalar::Util qw(blessed);
-our $VERSION = '0.121'; # VERSION
+our $VERSION = '0.130'; # VERSION
 
 sub Convert{
     my $self = shift;
@@ -17,10 +17,10 @@ sub Convert{
 
         @pre = map{blessed($_)?$_->as_string:$_}@pre;
         @post= map{blessed($_)?$_->as_string:$_}@post;
-        my $pretxt = join ' ',@pre;
-        my $posttxt = join ' ',@post;
-        $pretxt .= ' ' if $pretxt;
-        $posttxt = ' '.$posttxt if $posttxt;
+        my $pretxt = join '',@pre;
+        my $posttxt = join '',@post;
+        $pretxt .= '' if $pretxt;
+        $posttxt = ''.$posttxt if $posttxt;
         push(@temps,$pretxt."[\% value \%]".$posttxt);
     }
 
@@ -41,7 +41,7 @@ Template::Reverse::Converter::TT2 - Convert parts to TT2 format simply
 
 =head1 VERSION
 
-version 0.121
+version 0.130
 
 =head1 SYNOPSIS
 

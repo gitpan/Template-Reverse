@@ -1,10 +1,26 @@
 ==================================================
-Changes from 2012-07-06 00:00:00 +0000 to present.
+Changes from 2012-07-07 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.121 at 2013-07-06 16:56:39 +0000
+version 0.130 at 2013-07-07 23:46:06 +0000
 ------------------------------------------
+
+  Change: 836261b26108837a530e46f6a4603fa76a9e3a7e
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-08 08:45:32 +0000
+
+    Issue #7
+
+    * Need more tests for tt2 converter * remove the presumption that
+    tokens are splited by white spaces. * update test cases. * update
+    version 
+
+  Change: d90838ba280b5a5c58f561ad0f16fe66f46c3808
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-08 08:04:56 +0000
+
+    fix Moo default value to code ref. 
 
   Change: 3b826439049c12e18bed63ceccbc6849c0330d28
   Author: HyunSeung Kim <sng2nara@hanmail.net>
@@ -133,5 +149,5 @@ version 0.01 at 2013-04-04 10:45:06 +0000
     Documentation more. Change version to 0.008 in dist.ini 
 
 ================================================
-Plus 5 releases after 2012-07-06 00:00:00 +0000.
+Plus 5 releases after 2012-07-07 00:00:00 +0000.
 ================================================

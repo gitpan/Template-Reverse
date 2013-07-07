@@ -7,12 +7,12 @@ use Carp;
 use Template::Reverse::Part;
 use Algorithm::Diff qw(sdiff);
 use Scalar::Util qw(blessed);
-our $VERSION = '0.121'; # VERSION
+our $VERSION = '0.130'; # VERSION
 
 
 has 'sidelen' => (
     is=>'rw',
-    default => 10
+    default => sub{return 10;}
 );
 
 
@@ -115,7 +115,7 @@ Template::Reverse - A template generator getting different parts between pair of
 
 =head1 VERSION
 
-version 0.121
+version 0.130
 
 =head1 SYNOPSIS
 
@@ -125,7 +125,7 @@ version 0.121
     my $parts = $rev->detect($arr_ref1, $arr_ref2); # returns [ Template::Reverser::Part, ... ]
 
     use Template::Reverse::Converter::TT2;
-    my @templates = Template::Reverse::TT2Converter::Convert($parts); # named 'value1','value2',...
+    my @templates = Template::Reverse::TT2Converter::Convert($parts); 
 
 more
 
@@ -137,8 +137,8 @@ more
     my $rev = Template::Reverse->new;
 
     # generating patterns automatically!!
-    my $str1 = [qw(I am perl and smart)];
-    my $str2 = [qw(I am khs and a perlmania)];
+    my $str1 = ['I',' ','am',' ', 'perl',' ','and',' ','smart']; # White spaces should be explained explicity.
+    my $str2 = ['I',' ','am',' ', 'khs' ,' ', and',' ','a',' ','perlmania']; # Use Parse::Lex or Parse::Token::Lite to make it easy.
     my $parts = $rev->detect($str1, $str2);
 
     my $tt2 = Template::Reverse::Converter::TT2->new;
