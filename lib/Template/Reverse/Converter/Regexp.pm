@@ -1,9 +1,10 @@
-package Template::Reverse::Converter::TT2;
+package Template::Reverse::Converter::Regexp;
 
 # ABSTRACT: Convert parts to TT2 format simply
 
 use Moo;
 use Scalar::Util qw(blessed);
+use utf8;
 our $VERSION = '0.140'; # VERSION
 
 sub Convert{
@@ -21,8 +22,14 @@ sub Convert{
         my $posttxt = join '',@post;
         $pretxt .= '' if $pretxt;
         $posttxt = ''.$posttxt if $posttxt;
-        push(@temps,$pretxt."[\% value \%]".$posttxt);
-    }
+
+		if( $pretxt eq '' || $posttxt eq '' ){
+     	   push(@temps,qr!\Q$pretxt\E(.+)\Q$posttxt\E!);
+		}
+		else{
+     	   push(@temps,qr!\Q$pretxt\E(.+?)\Q$posttxt\E!);
+		}
+	}
 
     return \@temps;
 }
@@ -37,7 +44,7 @@ __END__
 
 =head1 NAME
 
-Template::Reverse::Converter::TT2 - Convert parts to TT2 format simply
+Template::Reverse::Converter::Regexp - Convert parts to TT2 format simply
 
 =head1 VERSION
 

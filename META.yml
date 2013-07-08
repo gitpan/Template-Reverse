@@ -17,10 +17,10 @@ meta-spec:
 name: Template-Reverse
 requires:
   Algorithm::Diff: 0
-  Carp: 0
   Moo: 0
   Scalar::Util: 0
+  utf8: 0
 resources:
   homepage: https://github.com/sng2c/Template-Reverse
   repository: git://github.com/sng2c/Template-Reverse.git
-version: 0.130
+version: 0.140

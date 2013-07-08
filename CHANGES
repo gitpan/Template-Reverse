@@ -1,10 +1,25 @@
 ==================================================
-Changes from 2012-07-07 00:00:00 +0000 to present.
+Changes from 2012-07-08 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.130 at 2013-07-07 23:46:06 +0000
+version 0.140 at 2013-07-08 01:30:12 +0000
 ------------------------------------------
+
+  Change: 47821fb37a91b3e2e2d43eda45d0b18a8534de5f
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-08 10:28:34 +0000
+
+    Issue #2
+
+    * Add converter which converts changable parts to Regexps. * Add a
+    test case. * update version 
+
+  Change: 43a7925e2eae28d0d990abc7ce5dfcb9f4dad5aa
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-08 10:02:48 +0000
+
+    update doc 
 
   Change: 836261b26108837a530e46f6a4603fa76a9e3a7e
   Author: sng2c <sng2nara@gmail.com>
@@ -149,5 +164,5 @@ version 0.01 at 2013-04-04 10:45:06 +0000
     Documentation more. Change version to 0.008 in dist.ini 
 
 ================================================
-Plus 5 releases after 2012-07-07 00:00:00 +0000.
+Plus 5 releases after 2012-07-08 00:00:00 +0000.
 ================================================
