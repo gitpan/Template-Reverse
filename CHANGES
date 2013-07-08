@@ -3,8 +3,20 @@ Changes from 2012-07-08 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.140 at 2013-07-08 01:30:12 +0000
+version 0.141 at 2013-07-08 01:37:09 +0000
 ------------------------------------------
+
+  Change: 6d45aa8af5d7baa3357d724019f2d70fcac0d8ec
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-08 10:36:54 +0000
+
+    update version 
+
+  Change: 4e5082c5eb52364a404014e5206065a668a39d64
+  Author: sng2c <sng2nara@gmail.com>
+  Date : 2013-07-08 10:35:58 +0000
+
+    fix doc. 
 
   Change: 47821fb37a91b3e2e2d43eda45d0b18a8534de5f
   Author: sng2c <sng2nara@gmail.com>

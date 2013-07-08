@@ -7,7 +7,7 @@ use utf8;
 use Template::Reverse::Part;
 use Algorithm::Diff qw(sdiff);
 use Scalar::Util qw(blessed);
-our $VERSION = '0.140'; # VERSION
+our $VERSION = '0.141'; # VERSION
 
 
 has 'sidelen' => (
@@ -115,7 +115,7 @@ Template::Reverse - A template generator getting different parts between pair of
 
 =head1 VERSION
 
-version 0.140
+version 0.141
 
 =head1 SYNOPSIS
 
