@@ -24,4 +24,4 @@ requires:
 resources:
   homepage: https://github.com/sng2c/Template-Reverse
   repository: git://github.com/sng2c/Template-Reverse.git
-version: 0.142
+version: 0.143

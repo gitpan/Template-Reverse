@@ -3,8 +3,14 @@ Changes from 2012-10-31 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.142 at 2013-10-31 07:35:55 +0000
+version 0.143 at 2013-10-31 08:05:07 +0000
 ------------------------------------------
+
+  Change: 924ac4c846a3cd4611e5cc1324b5d95b85b7b0c8
+  Author: HyunSeung Kim <sng2nara@hanmail.net>
+  Date : 2013-10-31 17:04:38 +0000
+
+    update doc/sample little bit. 
 
   Change: 3986340b96ea7d69d8c764f79e796ae34586e873
   Author: HyunSeung Kim <sng2nara@hanmail.net>
