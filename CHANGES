@@ -1,10 +1,22 @@
 ==================================================
-Changes from 2012-07-08 00:00:00 +0000 to present.
+Changes from 2012-10-31 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.141 at 2013-07-08 01:37:09 +0000
+version 0.142 at 2013-10-31 07:35:55 +0000
 ------------------------------------------
+
+  Change: 3986340b96ea7d69d8c764f79e796ae34586e873
+  Author: HyunSeung Kim <sng2nara@hanmail.net>
+  Date : 2013-10-31 16:34:25 +0000
+
+    Update README, enhance test codes 
+
+  Change: dcab9dbde63fa30332e5fb2d79bca414256b99c5
+  Author: HyunSeung Kim <sng2nara@hanmail.net>
+  Date : 2013-10-31 11:28:02 +0000
+
+    adding sample files 
 
   Change: 6d45aa8af5d7baa3357d724019f2d70fcac0d8ec
   Author: sng2c <sng2nara@gmail.com>
@@ -176,5 +188,5 @@ version 0.01 at 2013-04-04 10:45:06 +0000
     Documentation more. Change version to 0.008 in dist.ini 
 
 ================================================
-Plus 5 releases after 2012-07-08 00:00:00 +0000.
+Plus 5 releases after 2012-10-31 00:00:00 +0000.
 ================================================
